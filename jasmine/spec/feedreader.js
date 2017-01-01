@@ -66,6 +66,12 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        it('displays when clicked and hides when clicked again', function() {
+            $('.icon-list').trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            $('.icon-list').trigger('click');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
@@ -75,7 +81,13 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        beforeEach(function(done) {
+            loadFeed(0, done);
+        });
 
+        it('has a single entry element within the feed container', function() {
+            expect($('.feed').length).toBeGreaterThan(0);
+        });
     });  
     /* TODO: Write a new test suite named "New Feed Selection"*/
     describe('New Feed Selection', function() {
@@ -83,5 +95,24 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        beforeEach(function(done) {
+            loadFeed(0, function() {
+                title = $('.entry h2').html();
+                feedName = $('.header-title').html();
+                loadFeed(1, function() {
+                    done();
+                });
+            });
+        });
+
+        it('results in changed content', function(done) {
+            expect($('.entry h2').html()).not.toBe(title);
+            done();
+        });
+
+        it('loads a new feed', function(done) {
+            expect($('.header-title').html()).not.toBe(feedName);
+            done();
+        });
     });        
 }());
