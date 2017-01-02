@@ -23,27 +23,24 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         /* This test loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        it('has a defined URL and the URL is not empty', function() {
-            for (var i = 0; i < allFeeds.length; i++) {
-                expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url).not.toBe('');
-            }            
+        it('has a defined URL and the URL is not empty', function() {               
+            allFeeds.forEach(function(feed) {
+                expect(feed.url).toBeTruthy();
+            });         
         });
 
         /* This test loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-        it('has a defined name and the name is not empty', function() {
-            for (var i = 0; i < allFeeds.length; i++) {
-                expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name).not.toBe('');
-            }            
+        it('has a defined name and the name is not empty', function() {                
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeTruthy();
+            });       
         });
     });
 
@@ -62,9 +59,9 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
         it('displays when clicked and hides when clicked again', function() {
-            $('.icon-list').trigger('click');
+            $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(false);
-            $('.icon-list').trigger('click');
+            $('.menu-icon-link').trigger('click');
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
@@ -80,7 +77,7 @@ $(function() {
         });
 
         it('has a single entry element within the feed container', function() {
-            expect($('.feed').length).toBeGreaterThan(0);
+            expect($('.feed .entry').length).toBeGreaterThan(0);
         });
     });  
     /* Write a new test suite named "New Feed Selection"*/
