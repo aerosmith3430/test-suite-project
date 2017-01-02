@@ -1,3 +1,5 @@
+To run this project, open the `index.html` file in your browser.  The Jasmine test suites and specs will show at the bottom of the screen.  The tests can be found in `jasmine/spec/feedreader.js`.
+
 # Project Overview
 
 In this project you are given a web-based application that reads RSS feeds. The original developer of this application clearly saw the value in testing, they've already included [Jasmine](http://jasmine.github.io/) and even started writing their first test suite! Unfortunately, they decided to move on to start their own company and we're now left with an application with an incomplete test suite. That's where you come in.
